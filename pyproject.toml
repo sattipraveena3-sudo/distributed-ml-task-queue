@@ -1,6 +1,20 @@
 [project]
-name="distributed-ml-task-queue"
-version="1.0.0"
-requires-python=">=3.11"
+name = "distributed-ml-task-queue"
+version = "2.0.0"
+description = "Redis-backed distributed ML task queue with retries, DLQ, worker heartbeats and observability"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi==0.116.1",
+  "uvicorn[standard]==0.35.0",
+  "pydantic==2.11.7",
+  "redis==6.4.0",
+]
+
+[project.scripts]
+mlq-api = "app.cli:api"
+mlq-worker = "app.worker:main"
+
 [tool.pytest.ini_options]
-pythonpath=["."]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
